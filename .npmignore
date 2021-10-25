@@ -1,0 +1,5 @@
+coverage
+src
+tests
+commitlint.config.js
+.npmrc

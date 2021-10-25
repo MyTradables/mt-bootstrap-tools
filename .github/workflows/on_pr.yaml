@@ -1,0 +1,33 @@
+name: PR
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  validate:
+    name: Validate
+    environment: dev_environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Release dry-run
+        run: npm run release -- --dry-run
